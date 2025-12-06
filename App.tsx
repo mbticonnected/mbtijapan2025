@@ -28,7 +28,7 @@ export default function App() {
       setFortune(result);
     } catch (err) {
       console.error(err);
-      setError("神靈此刻似乎很忙碌，請稍後再試。");
+      setError("MBTI小精靈此刻似乎很忙碌，請稍後再試。");
       setAppState('input'); // Go back on error
     } finally {
       setIsLoading(false);
@@ -66,7 +66,7 @@ export default function App() {
            <span className="text-shrine-red">⛩️</span> MBTI 神社
         </h1>
         <p className="text-stone-500 text-sm md:text-base font-serif">
-          讓守護靈為你的性格指引迷津
+          讓MBTI小精靈為你的性格指引迷津
         </p>
       </header>
 
@@ -131,7 +131,7 @@ export default function App() {
             </div>
             
             <p className="text-center mt-8 text-xs text-stone-400">
-               * 守護靈會根據你的性格特質進行深度解析
+               * MBTI小精靈會根據你的性格特質進行深度解析
             </p>
           </div>
         )}
@@ -155,7 +155,7 @@ export default function App() {
       </main>
 
       <footer className="fixed bottom-0 w-full py-4 text-center text-stone-400 text-xs bg-gradient-to-t from-[#f5f5f4] to-transparent pointer-events-none">
-         Designed with Zen & AI
+         MBTI Connected
       </footer>
     </div>
   );

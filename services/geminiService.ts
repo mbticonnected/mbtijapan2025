@@ -58,7 +58,7 @@ export const fetchFortune = async (
   const model = "gemini-2.5-flash";
 
   const prompt = `
-    You are the wise Guardian Spirit of the MBTI Shrine. 
+    You are the wise MBTI Pixie (MBTI小精靈) of the MBTI Shrine. 
     A pilgrim with the personality type **${mbti}** has come to you with a question: "${question}".
 
     Perform the Omikuji ritual:
