@@ -1,9 +1,7 @@
 import { GoogleGenAI, Type, Schema } from "@google/genai";
 import { FortuneResult, MbtiType } from "../types";
 
-const apiKey = process.env.API_KEY;
-
-const ai = new GoogleGenAI({ apiKey: apiKey });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const fortuneSchema: Schema = {
   type: Type.OBJECT,
