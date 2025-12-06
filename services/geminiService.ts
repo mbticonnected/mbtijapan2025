@@ -43,15 +43,16 @@ export const fetchFortune = async (
   mbti: MbtiType,
   question: string
 ): Promise<FortuneResult> => {
-  // CRITICAL CHANGE: Initialize AI inside the function call, not at the top level.
-  // This prevents the app from crashing on startup if the key is missing.
+  // CRITICAL: Ensure process.env.API_KEY is replaced by Vite during build
   const apiKey = process.env.API_KEY;
   
-  if (!apiKey) {
-    throw new Error("API Key is missing. Please set API_KEY in your Vercel environment variables.");
+  if (!apiKey || apiKey.length === 0) {
+    console.error("API Key is empty. Check vite.config.ts define settings.");
+    throw new Error("系統連線設定有誤 (API Key Missing)。請確認 Vercel 環境變數已設定並重新部署。");
   }
 
   const ai = new GoogleGenAI({ apiKey: apiKey });
+  // Use gemini-2.5-flash as requested by guidelines (updated from 1.5)
   const model = "gemini-2.5-flash";
 
   const prompt = `
@@ -77,7 +78,7 @@ export const fetchFortune = async (
       config: {
         responseMimeType: "application/json",
         responseSchema: fortuneSchema,
-        temperature: 0.8, // Slightly creative for the poem/fortune
+        temperature: 0.8,
       },
     });
 

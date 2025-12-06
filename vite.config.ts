@@ -3,18 +3,24 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // 載入環境變數
-  // 第三個參數 '' 表示載入所有變數，不限於 VITE_ 開頭
+  // 1. 載入 .env 檔案中的變數
   const env = loadEnv(mode, (process as any).cwd(), '');
+
+  // 2. 確定最終使用的 API KEY
+  // 優先順序: Vercel 系統變數 > .env 變數 > VITE_ 開頭的變數
+  const apiKey = process.env.API_KEY || env.API_KEY || process.env.VITE_API_KEY || env.VITE_API_KEY || '';
+
+  console.log(`[Vite Build] API Key injected: ${apiKey ? 'Yes (Hidden)' : 'No (Empty)'}`);
 
   return {
     plugins: [react()],
     define: {
-      // 1. 注入 API_KEY (優先使用 API_KEY，如果沒有則找 VITE_API_KEY)
-      'process.env.API_KEY': JSON.stringify(env.API_KEY || env.VITE_API_KEY || ''),
+      // 將 Key 硬編碼到前端 bundle 中
+      'process.env.API_KEY': JSON.stringify(apiKey),
       
-      // 2. 定義一個空的 process.env 物件，防止瀏覽器報 "process is not defined" 錯誤
-      'process.env': {},
+      // 定義全域 process 物件，避免部分套件報錯，但不要覆蓋上面的 API_KEY
+      'process.env': JSON.stringify({}), 
+      'process.browser': JSON.stringify(true),
     },
   };
 });
