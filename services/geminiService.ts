@@ -55,7 +55,6 @@ export const fetchFortune = async (
   }
 
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  // Use gemini-2.5-flash as requested by guidelines
   const model = "gemini-2.5-flash";
 
   const prompt = `

@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // 1. 載入 .env 檔案中的變數 (本地開發用)
-  const env = loadEnv(mode, process.cwd(), '');
+  const env = loadEnv(mode, '.', '');
 
   // 2. 確定最終使用的 API KEY
   // process.env.API_KEY 來自 Vercel 建置環境
