@@ -1,9 +1,7 @@
 import { GoogleGenAI, Type, Schema } from "@google/genai";
 import { FortuneResult, MbtiType } from "../types";
 
-// Initialize the Google GenAI client with the API key from process.env
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
+// Schema definition remains the same
 const fortuneSchema: Schema = {
   type: Type.OBJECT,
   properties: {
@@ -45,6 +43,15 @@ export const fetchFortune = async (
   mbti: MbtiType,
   question: string
 ): Promise<FortuneResult> => {
+  // CRITICAL CHANGE: Initialize AI inside the function call, not at the top level.
+  // This prevents the app from crashing on startup if the key is missing.
+  const apiKey = process.env.API_KEY;
+  
+  if (!apiKey) {
+    throw new Error("API Key is missing. Please set API_KEY in your Vercel environment variables.");
+  }
+
+  const ai = new GoogleGenAI({ apiKey: apiKey });
   const model = "gemini-2.5-flash";
 
   const prompt = `
