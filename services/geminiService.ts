@@ -43,16 +43,19 @@ export const fetchFortune = async (
   mbti: MbtiType,
   question: string
 ): Promise<FortuneResult> => {
-  // CRITICAL: Ensure process.env.API_KEY is replaced by Vite during build
+  // Use process.env.API_KEY directly as per guidelines
   const apiKey = process.env.API_KEY;
   
+  // Debug log (masked)
+  console.log(`[Debug] API Key Status: ${apiKey ? "Present (Length: " + apiKey.length + ")" : "Missing"}`);
+  
   if (!apiKey || apiKey.length === 0) {
-    console.error("API Key is empty. Check vite.config.ts define settings.");
+    console.error("API Key is empty. Check env settings.");
     throw new Error("系統連線設定有誤 (API Key Missing)。請確認 Vercel 環境變數已設定並重新部署。");
   }
 
-  const ai = new GoogleGenAI({ apiKey: apiKey });
-  // Use gemini-2.5-flash as requested by guidelines (updated from 1.5)
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  // Use gemini-2.5-flash as requested by guidelines
   const model = "gemini-2.5-flash";
 
   const prompt = `
