@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MbtiType, FortuneResult as FortuneResultType, UserInput } from './types';
 import { fetchFortune } from './services/geminiService';
 import { ToriiGate } from './components/ToriiGate';
