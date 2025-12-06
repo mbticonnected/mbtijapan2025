@@ -1,0 +1,5 @@
+{
+  "name": "MBTI Shrine",
+  "description": "A mystical shrine where you can draw a fortune stick interpreted through the lens of your MBTI type using Gemini AI.",
+  "requestFramePermissions": []
+}
