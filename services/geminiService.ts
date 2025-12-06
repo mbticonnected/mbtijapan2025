@@ -1,6 +1,7 @@
 import { GoogleGenAI, Type, Schema } from "@google/genai";
 import { FortuneResult, MbtiType } from "../types";
 
+// Initialize the Google GenAI client with the API key from process.env
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const fortuneSchema: Schema = {
